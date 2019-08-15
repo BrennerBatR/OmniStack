@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const routes = require('./routes');
+const cors = require('cors');
 
 const server = express(); //servidor do express para ouvir endereços
 
@@ -8,7 +9,7 @@ mongoose.connect('mongodb+srv://Brenner:dezoitos@cluster0-kdimj.mongodb.net/omni
     useNewUrlParser : true
 })
 
-
+server.use(cors());
 server.use(express.json());
 server.use(routes); //adicionando as configs do routes
 

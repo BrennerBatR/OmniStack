@@ -20,7 +20,7 @@ const DevSchema = new Schema({
     }],
     deslikes: [{
         type: Schema.Types.ObjectId,
-        ref:'Dev'
+        ref: 'Dev'
     }],
 }, {
         timestamps: true, ///[createdAt , updatedAt]
