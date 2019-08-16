@@ -9,8 +9,8 @@ module.exports = {
 
         const loggedUser = await Dev.findById(user); //verificar se esta logado
 
-        if(loggedUser == null)
-            return res.status(404).json({error : "Usuário não encontrado"})
+        if (loggedUser == null)
+            return res.status(404).json({ error: "Usuário não encontrado" })
         const users = await Dev.find({ //$and = AND no where
             $and: [
                 { _id: { $ne: user } },//todos usuarios q tem o id diferente do user
@@ -25,10 +25,10 @@ module.exports = {
         const { username } = req.body;
         const userExists = await Dev.findOne({ user: username });
 
-        if (userExists)
-            return res.status(409).json(userExists);
+
 
         const response = await axios.get(`https://api.github.com/users/${username}`);
+
 
         const { name, bio, avatar_url: avatar } = response.data;
 
@@ -37,7 +37,10 @@ module.exports = {
             name,
             bio,
             avatar
-        })
+        });
+
+        /*if (userExists)
+            return res.status(204).json({dev});*/
 
         return res.json({ dev });
     }
