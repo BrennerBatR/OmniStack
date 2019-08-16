@@ -15,8 +15,7 @@ export default function Login({ history }) { //export exporta assim q ele for re
             username,
         }); //o inicio da rota foi definida dentro do service api
 
-        const {_id } = response.data.dev;
-
+        const { _id } = response.data.dev;
         history.push(`/dev/${_id}`); //o hisotry é ehrdado do REACT DOM, fazer redirecionamento de paginas é assim
     }
 

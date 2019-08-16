@@ -15,7 +15,7 @@ module.exports = {
             $and: [
                 { _id: { $ne: user } },//todos usuarios q tem o id diferente do user
                 { _id: { $nin: loggedUser.likes } },//todos usuarios q nao estao na LISTA de likes do loggeduser
-                { _id: { $nin: loggedUser.deslikes } },//todos usuarios q nao estao na LISTA de deslikes do loggeduser
+                { _id: { $nin: loggedUser.dislikes } },//todos usuarios q nao estao na LISTA de dislikes do loggeduser
             ]
         })
         return res.json(users);
@@ -24,7 +24,8 @@ module.exports = {
     async store(req, res) {
         const { username } = req.body;
         const userExists = await Dev.findOne({ user: username });
-
+        if (userExists)
+            return res.status(200).json({ dev :userExists });
 
 
         const response = await axios.get(`https://api.github.com/users/${username}`);
@@ -39,8 +40,6 @@ module.exports = {
             avatar
         });
 
-        /*if (userExists)
-            return res.status(204).json({dev});*/
 
         return res.json({ dev });
     }

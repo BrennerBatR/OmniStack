@@ -17,10 +17,10 @@ module.exports = {
 
        
         if (loggedDev.likes.includes(targetDev._id)) {
-            return res.status(404).json({ error: 'Deslike already exist' });
+            return res.status(404).json({ error: 'Dislike already exist' });
         }
 
-        loggedDev.deslikes.push(targetDev._id); //salvando no vetor de likes
+        loggedDev.dislikes.push(targetDev._id); //salvando no vetor de likes
         await loggedDev.save();
 
 
