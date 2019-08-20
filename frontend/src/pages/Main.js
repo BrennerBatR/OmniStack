@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import io from 'socket.io-client';
 import { Link } from 'react-router-dom';
 import './Main.css';
 
@@ -7,9 +8,11 @@ import api from '../services/api';
 import logo from '../assets/logo.svg';
 import dislike from '../assets/dislike.svg';
 import like from '../assets/like.svg';
+import itsamatch from '../assets/itsamatch.png';
 
 export default function Main({ match }) { //dentro do match tenho todos parametros q foram passados para essa rota
     const [users, setUsers] = useState([]);
+    const [matchDev, setMatchDev] = useState(null);
 
     useEffect(() => {
         async function loadUsers() {
@@ -26,6 +29,27 @@ export default function Main({ match }) { //dentro do match tenho todos parametr
         loadUsers();
     }, [match.params.id]) //1 parametro -> qual funcao quero executar e segundo aprametro quando quero executar a funcao (no caso toda vez o id do parametro for alterado eu chamo a funcao novamente)
 
+    useEffect(() => { //esse fica conectado com websocket
+        const socket = io('http://localhost:3333', {
+            query: { user: match.params.id } //enviando id para o back
+        });
+
+        socket.on('match', dev => {
+            console.log(dev);
+            setMatchDev(dev);
+        });
+
+        /*socket.on('world', message=> {
+            console.log(message);
+        });
+
+        setTimeout(()=> {
+            socket.emit("hello" , {
+                message:'Hello World!'
+            })
+        },3000);*/
+
+    }, [match.params.id]);
     async function handleLike(id) { //recebe o id do usuario q vou dar o like
         await api.post(`/devs/${id}/likes`, null, {
             headers: { user: match.params.id },
@@ -72,6 +96,17 @@ export default function Main({ match }) { //dentro do match tenho todos parametr
             ) : (
                     <div className="empty"> Acabou :( </div>
                 )}
+
+            {matchDev && ( /*aqui ficara a div de deu match */
+                <div className="match-container">
+                    <img src={itsamatch} alt="It's a match" />
+                    <img className="avatar" src={matchDev.avatar} alt={matchDev.name} />
+
+                    <strong>{matchDev.name}</strong>
+                    <p>{matchDev.bio}</p>
+                    <button type="button" onClick={() => setMatchDev(null)}> FECHAR </button>
+                </div>
+            )}
 
         </div>
     )
