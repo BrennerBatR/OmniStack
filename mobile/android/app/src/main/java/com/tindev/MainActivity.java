@@ -1,9 +1,12 @@
 package com.tindev;
 
 import com.facebook.react.ReactActivity;
+<<<<<<< HEAD
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
 import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
+=======
+>>>>>>> f3e1172eb80e0b9890e8c0cbffd68b68bf01df6e
 
 public class MainActivity extends ReactActivity {
 
@@ -15,6 +18,7 @@ public class MainActivity extends ReactActivity {
     protected String getMainComponentName() {
         return "tindev";
     }
+<<<<<<< HEAD
 
     @Override
     protected ReactActivityDelegate createReactActivityDelegate() {
@@ -25,4 +29,6 @@ public class MainActivity extends ReactActivity {
             }
         };
     }
+=======
+>>>>>>> f3e1172eb80e0b9890e8c0cbffd68b68bf01df6e
 }
