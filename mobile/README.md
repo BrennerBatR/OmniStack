@@ -1,0 +1,3 @@
+-Primeira vez que instalar o app abra o emulador (recomendo o do andorid studio) e digite yarn react-native run-android.
+-Após isso o app sera instalado, aperte ctrl + m e habilite o Enable live reload ( com isso o seu app sera atualizado toda vez que vc salvar o código).
+-Caso feche todo o projeto, na próxima vez que for utilizá-lo, basta abrir o emulador e digitar yarn start no projeto!
